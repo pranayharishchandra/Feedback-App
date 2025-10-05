@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import FeedbackForm from "./components/FeedbackForm";
+import FeedbackList from "./components/FeedbackList";
+import Card from "./components/Card";
 
 function App() {
+  const [feedbacks, setFeedbacks] = useState([]);
+
+  const addFeedback = (newFeedback) => {
+    setFeedbacks((prev) => [newFeedback, ...prev]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
+      <Card>
+        <h2 style={{ textAlign: "center" }}>Feedback App</h2>
+      </Card>
+
+      <FeedbackForm onAdd={addFeedback} />
+      <FeedbackList feedbacks={feedbacks} />
     </div>
   );
 }
